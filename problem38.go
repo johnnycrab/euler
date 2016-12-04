@@ -43,23 +43,6 @@ func isPandigital(num int) bool {
 func main() {
 
 	largestPandigital := 0
-
-	/*i := 192
-
-	concat := i
-	n := 1
-
-	// multiply until we get an at least nine digit num
-	for concat < 100000000 {
-		n++
-		concat, _ = strconv.Atoi(strconv.Itoa(concat) + strconv.Itoa(i*n))
-		fmt.Println(concat)
-	}
-
-	// check if we have exactly nine digits and its pandigital
-	if concat < 1000000000 && isPandigital(concat) && concat > largestPandigital {
-		largestPandigital = concat
-	}*/
 	
 	// this is our integer we multiply everything with. as we have at least i o i*2, i will be smaller than 10000
 	for i := 1; i < 10000; i++ {
