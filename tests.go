@@ -21,10 +21,12 @@ func main() {
 		}
 	}*/
 
-	for n := 0; n<11; n++ {
-		if (n*n-3)%11 == 0 {
-			fmt.Println(n)
-		}
-	}
+	a := make([]int, 5)
+
+	b := a[0:2]
+
+	b[1] = 5
+
+	fmt.Println(a)
 
 }
