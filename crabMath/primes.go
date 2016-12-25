@@ -51,3 +51,30 @@ func PrimesUpTo(n int) []int {
 
 	return primes
 }
+
+/*
+	Simple prime factorization of an integer, using the primes passed in as sieve
+	Returns an error (first return value `true`) if the sieve is not big enough
+*/
+func SimplePrimeFactorizationWithSieve(n int, primeSieve []int) (bool, []int) {
+
+	factors := []int{}
+
+	if len(primeSieve) < n || (n == 1 || n == 0) {
+		return true, factors
+	}
+
+	for primeSieve[n - 1] == 1 {
+		for i, v := range primeSieve {
+			if v == 0 && n%(i+1) == 0 {
+				factors = append(factors, i+1)
+				n = n/(i+1)
+				break
+			}
+		}
+	}
+
+	factors = append(factors, n)
+
+	return false, factors
+}

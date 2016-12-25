@@ -1,62 +1,52 @@
 /*
 	Problem 75
-
-
-	UNSOLVED YET!!
 */
 
 package main
 
 import (
 	"fmt"
-	"math"
+	"./crabMath"
 )
 
-const n = 1500 * 1000
-
-// we keep track of in how many ways a length can be formed into a right-angled triangle
-var lengths [n]int
+const n int = 5000
+var primeSieve []int
 
 func main() {
 
-	fmt.Println("foo")
-	// we iterate over all integer values and count up the lengths of the right sided triangle they form
-	// a triangle is of the form (a,b,c) with a < b < c
-	// a = 439339 is the highest value that `a` can reach
+	primitivePythagoreanTriples := crabMath.GetPrimitivePythagoreanTriples(n)
 
-	for a := 1; a <= 439339; a++ {
-		b := a
+	generatedLengths := [1500000]int{}
+	
+	for _, triple := range primitivePythagoreanTriples {
+
+		a := triple[0]
+		b := triple[1]
+		c := triple[2]
 		
-		aDivByThree := a%3 == 0
+		k := 0
 
 		for {
+			k++
+			newA := a*k
+			newB := b*k
+			newC := c*k
 
-			// calculate c
-			pyth := a*a + b*b
-
-			c := int(math.Sqrt(float64(pyth)))
-
-			length := a+b+c
-			if length <= n {
-				// length is still in range. check if we have a right triangle with all integer sides
-				if pyth == c*c {
-					lengths[length-1]++
-				}
-			} else {
+			sum := newA + newB + newC
+			if sum > 1500000 {
 				break
 			}
-			
-			b++
+
+			generatedLengths[sum-1]++
 		}
 	}
 
-	count := 0
-	for _, v := range lengths {
+	counter := 0
+	for _, v := range generatedLengths {
 		if v == 1 {
-			count++
+			counter++
 		}
 	}
 
-	fmt.Println(count)
-
+	fmt.Println(counter)
 }

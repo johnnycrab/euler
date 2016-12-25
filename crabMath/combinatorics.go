@@ -19,5 +19,13 @@ func Factorial(n int) int {
 }
 
 func NChooseK(n, k int) int {
+	if k == 0 {
+		return 1
+	}
+
+	if k == 1 {
+		return n
+	}
+
 	return Factorial(n)/(Factorial(k) * Factorial(n-k))
 }
