@@ -38,3 +38,14 @@ func IntSlicesContainSame(a, b []int) bool {
 
 	return ret
 }
+
+// returns a new slice where the order of elements has been reversed
+func IntSliceReverse(s []int) []int {
+	s_tilde := make([]int, len(s))
+
+	for i, v := range s {
+		s_tilde[len(s) - 1 - i] = v
+	}
+
+	return s_tilde
+}
