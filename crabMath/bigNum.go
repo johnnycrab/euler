@@ -1,5 +1,7 @@
 package crabMath
 
+import "math/big"
+
 /*
 	Given two slices of integers where each entry is expected to be in {0,1,...,9} (i.e. the slice
 	represents a big integers where each entry is a digit),
@@ -57,4 +59,26 @@ func SliceAdd(a, b []int) []int {
 	}
 
 	return result
+}
+
+/*
+	Power function a^b of positive integers, returns big.Int
+*/
+func IntegerPowerBig(a, b int64) *big.Int {
+	if b == 0 {
+		return big.NewInt(1)
+	}
+
+	if b == 1 {
+		return big.NewInt(a)
+	}
+
+	res := big.NewInt(a)
+	A := big.NewInt(a)
+	var i int64 = 1
+	for ; i < b; i++ {
+		res.Mul(res, A)
+	}
+
+	return res
 }
