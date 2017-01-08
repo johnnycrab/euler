@@ -5,6 +5,14 @@ import (
 	"math/big"
 )
 
+func Abs(a int) int {
+	if a < 0 {
+		return a*(-1)
+	}
+
+	return a
+}
+
 func Max(a int, b int) int {
 	if a >= b {
 		return a
