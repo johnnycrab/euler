@@ -6,13 +6,7 @@ import (
 
 
 func main() {
-	var a float64 = float64(519432)/float64(632382)
-	
-	var b float64 = a
-
-	for i := 1; i < 525806; i++ {
-		b *= a
+	for i := 0; i<11; i++ {
+		fmt.Println((i*i*i*i -5*i*i + 5)%11)
 	}
-
-	fmt.Println(b)
 }
