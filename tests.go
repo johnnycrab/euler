@@ -4,9 +4,13 @@ import (
 	"fmt"
 )
 
+const N int = 60466176
 
 func main() {
-	for i := 0; i<11; i++ {
-		fmt.Println((i*i*i*i -5*i*i + 5)%11)
+	
+	possibilities := [N][6]int{}
+	
+	for i := 1; i<=6; i++ {
+		
 	}
 }

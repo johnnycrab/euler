@@ -49,10 +49,16 @@ func eulerPhi(n int) int {
 func main() {
 	primeSieve = crabMath.PrimeSieve(N)
 
-	sum := 0
+	/*sum := 0
 	for d := 2; d <= N; d++ {
 		sum += eulerPhi(d)
 	} 
 
-	fmt.Println(sum)
+	fmt.Println(sum)*/
+
+	for n := 2; n<=1000000; n++ {
+		if eulerPhi(n) == 16 {
+			fmt.Println(n)
+		}
+	}
 }
