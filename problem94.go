@@ -3,51 +3,67 @@
 
 	We are looking for almost-equilateral Heronian triangles where `a` is a given side.
 
-	- `a` must be odd
+	- `a` must be odd and a unit in Z/16Z
 */
 
 package main
 
 import (
 	"fmt"
-	"./crabMath"
+	//"math/big"
+	//"./crabMath"
 )
 
 const N int = 1000*1000*1000
 
 
 func main() {
-	sum := 0
 
-	pythTriples := crabMath.GetPrimitivePythagoreanTriples(20000)
+	x_k := 2
+	y_k := 1
 
-	for _, triple := range pythTriples {
-		// a is even. Don't need that
-		a := triple[2]
-		if a%2 == 0 {
-			continue
+	perimeterSum := 0
+
+	for x_k < N {
+		x_k1 := 2*x_k + 3*y_k
+		y_k1 := 2*y_k + x_k
+
+		x_k = x_k1
+		y_k = y_k1
+
+		a3_1 := 2*x_k + 1
+		a3_2 := 2*x_k - 1
+
+		if a3_1%3 == 0 {
+			a := a3_1/3
+			
+			if (a+1)%2 == 0 || y_k%2 == 0 {
+				// a is a solution!
+				perimeter := 3*a + 1
+
+				if perimeter <= N {
+					perimeterSum += 3*a + 1	
+				}
+				
+			}
 		}
 
-		b_1 := (a+1)/2
-		b_2 := (a-1)/2
-
-		if triple[0] == b_1 || triple[0] == b_2 {
-			//fmt.Println(a, triple[0]*2)
-			perimeter := a+a+triple[0]
-			if perimeter <= N {
-				sum += a+a+triple[0]	
-			}
+		if a3_2%3 == 0 {
+			a := a3_2/3
 			
-		} 
-		if triple[1] == b_1 || triple[1] == b_2 {
-			//fmt.Println(a, triple[1]*2)
+			if (a+1)%2 == 0 || y_k%2 == 0 {
+				// a is a solution!
 
-			perimeter := a+a+triple[1]
-			if perimeter <= N {
-				sum += a+a+triple[1]	
+				perimeter := 3*a - 1
+
+				if perimeter <= N {
+					perimeterSum += 3*a - 1	
+				}
 			}
 		}
 	}
 
-	fmt.Println(sum)
+	fmt.Println(perimeterSum)
+
+	
 }

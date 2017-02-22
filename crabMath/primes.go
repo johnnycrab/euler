@@ -78,3 +78,30 @@ func SimplePrimeFactorizationWithSieve(n int, primeSieve []int) (bool, []int) {
 
 	return false, factors
 }
+
+/*
+	Given a simple prime factorization, it groups prime factors together 
+	by representing each prime and its power as a pair.
+	E.g. [2,2,2,3,3] becomes [[2,3],[3,2]]
+*/
+func PrimeFactorizationToPowers(factorization []int) [][2]int {
+	grouped := [][2]int{}
+
+	currentPrime := factorization[0]
+	count := 1
+
+	for i := 1; i<len(factorization); i++ {
+		p := factorization[i]
+		if p != currentPrime {
+			grouped = append(grouped, [2]int{currentPrime, count})
+			count = 1
+			currentPrime = p
+		} else {
+			count++
+		}
+	}
+
+	grouped = append(grouped, [2]int{currentPrime, count})
+
+	return grouped
+}

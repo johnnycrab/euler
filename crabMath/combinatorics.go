@@ -86,9 +86,44 @@ func fillSlice(slice [][]int, n int) {
 	}
 }
 
+func fillSlicePowerSet(slice [][]int, atPos int, n int, k int) {
+	if atPos == k {
+		return
+	}
+
+	dist := len(slice)/n
+
+
+	for i := 1; i <= n; i++ {
+
+		startAt := (i-1)*dist
+		for m := startAt; m < startAt + dist; m++ {
+			slice[m][atPos] = i
+		}
+		//fmt.Println(slice)
+		fillSlicePowerSet(slice[startAt:startAt+dist], atPos + 1, n, k)
+	}
+}
+
 func S_n(n int) [][]int {
 	permutations := make([][]int, Factorial(n))
 	fillSlice(permutations, n)
 
 	return permutations
+}
+
+/*
+	Returns all elements of {1,...,n}^k 
+*/
+func SetNPowerK(n, k int) [][]int {
+	neededLength := Power(n, k)
+	elements := make([][]int, neededLength)
+
+	for i := 0; i<neededLength; i++ {
+		elements[i] = make([]int, k)
+	}
+
+	fillSlicePowerSet(elements, 0, n, k)
+
+	return elements
 }

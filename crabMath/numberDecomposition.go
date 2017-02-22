@@ -17,7 +17,7 @@ func GetDigits(ofNum int) []int {
 
 /*
 	Given a slice of digits, returns the appropriate integer in reverse order
-	Example: [1,2,3] produces 123
+	Example: [3,2,1] produces 123
 */
 func DigitsToInt(digits []int) int {
 	power := 1
