@@ -127,3 +127,57 @@ func SetNPowerK(n, k int) [][]int {
 
 	return elements
 }
+
+/*
+	Returns NChooseK-sets, that is all distinct tuples of the form {p_1, ..., p_k} with 1 <= p_i <= n and p_i > p_{i+1}  
+	Works only for small n
+*/
+func NChooseKSets(n, k int) [][]int {
+
+	neededLength := NChooseK(n,k)
+	sets := make([][]int, neededLength)
+
+	for i := 0; i<neededLength; i++ {
+		sets[i] = make([]int, k)
+	}
+
+	nChooseKSetsFillSlice(sets, 1, n, k)
+
+	return sets
+}
+
+// given number m on position p of k slots, how many slices are needed?
+func nChooseKSetsGetNumOfSlices(sum *int, m int, p int, k int) {
+	if p == k {
+		*sum++
+	} else {
+		for l := m-1; l >= k-p; l-- {
+			nChooseKSetsGetNumOfSlices(sum, l, p+1, k)
+		} 
+	}
+}
+
+func nChooseKSetsFillSlice(slice [][]int, atPos int, n int, k int) {
+	previousNum := n+1
+	if atPos != 1 {
+		previousNum = slice[0][atPos - 2]
+	}
+
+
+	downTo := k - atPos + 1
+	nextCut := 0
+	for m := previousNum - 1; m >= downTo; m-- {
+		slicesNeeded := NChooseK(m-1, k - atPos)
+
+		sliceShare := slice[nextCut: nextCut + slicesNeeded]
+		nextCut += slicesNeeded
+
+		for i := 0; i<len(sliceShare); i++ {
+			sliceShare[i][atPos - 1] = m
+		}
+
+		if atPos != k {
+			nChooseKSetsFillSlice(sliceShare, atPos + 1, n, k)
+		}
+	}
+}

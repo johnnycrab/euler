@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
+	"./crabMath"
 )
-
-const N int = 60466176
 
 func main() {
 	
-	var a int = 1000*1000*1000*1000*10
+	a := crabMath.NChooseKSets(10,6)
 	fmt.Println(a)
 }
