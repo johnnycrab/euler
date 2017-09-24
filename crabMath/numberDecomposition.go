@@ -29,3 +29,14 @@ func DigitsToInt(digits []int) int {
 
 	return result
 }
+
+func DigitsToIntReverse(digits []int) int {
+	power := 1
+	result := 0
+	for i := len(digits) - 1; i >= 0; i-- {
+		result += digits[i] * power
+		power *= 10
+	}
+
+	return result
+}

@@ -7,6 +7,7 @@ import (
 
 func main() {
 	
-	a := crabMath.NChooseKSets(10,6)
-	fmt.Println(a)
+	r1 := crabMath.Rational{A: 8, B: 2}
+	r2 := crabMath.Rational{A: 4, B: 1}
+	fmt.Println(crabMath.RationalsEqual(r1, r2), r1, r2)
 }
